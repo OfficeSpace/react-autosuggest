@@ -112,6 +112,12 @@ class Autosuggest extends Component {
     this.setState(newState);
   }
 
+  fireOnCommit() {
+    if (this.props.onCommit && this.state.suggestions != null && this.state.suggestions.indexOf(this.state.value) != -1) {
+      this.props.onCommit()
+    }
+  }
+
   onInputChange(event) {
     let newValue = event.target.value;
 
@@ -128,7 +134,9 @@ class Autosuggest extends Component {
 
     switch (event.keyCode) {
       case 13: // enter
+        this.fireOnCommit();
         this.setSuggestionsState(null);
+
         break;
 
       case 27: // escape
@@ -188,6 +196,7 @@ class Autosuggest extends Component {
   }
 
   onSuggestionMouseDown(sectionIndex, suggestionIndex) {
+    this.fireOnCommit();
     this.setState({
       value: this.getSuggestionText(sectionIndex, suggestionIndex),
       suggestions: null,
