@@ -83,7 +83,10 @@ class Autosuggest extends Component {
             suggestions = null;
           }
 
-          this.cache[input] = suggestions;
+          if (this.props.useCache) {
+            this.cache[input] = suggestions;
+          }
+
           this.setSuggestionsState(suggestions);
         }
       }.bind(this));
