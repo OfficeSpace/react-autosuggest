@@ -205,12 +205,12 @@ class Autosuggest extends Component {
       valueBeforeUpDown: null
     }, function() {
       // This code executes after the component is re-rendered
+      this.fireOnCommit();
       setTimeout(function() {
         findDOMNode(this.refs.input).focus();
       }.bind(this));
     });
 
-    this.fireOnCommit();
   }
 
   getSuggestionId(sectionIndex, suggestionIndex) {
