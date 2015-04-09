@@ -116,9 +116,7 @@ class Autosuggest extends Component {
   }
 
   fireOnCommit() {
-    if (this.props.onCommit && this.state.suggestions != null && this.state.suggestions.indexOf(this.state.value) != -1) {
-      this.props.onCommit()
-    }
+    this.props.onCommit()
   }
 
   onInputChange(event) {
@@ -199,7 +197,6 @@ class Autosuggest extends Component {
   }
 
   onSuggestionMouseDown(sectionIndex, suggestionIndex) {
-    this.fireOnCommit();
     this.setState({
       value: this.getSuggestionText(sectionIndex, suggestionIndex),
       suggestions: null,
@@ -212,6 +209,8 @@ class Autosuggest extends Component {
         findDOMNode(this.refs.input).focus();
       }.bind(this));
     });
+
+    this.fireOnCommit();
   }
 
   getSuggestionId(sectionIndex, suggestionIndex) {

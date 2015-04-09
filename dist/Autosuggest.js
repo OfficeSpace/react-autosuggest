@@ -166,9 +166,7 @@ var Autosuggest = (function (_Component) {
   }, {
     key: 'fireOnCommit',
     value: function fireOnCommit() {
-      if (this.props.onCommit && this.state.suggestions != null && this.state.suggestions.indexOf(this.state.value) != -1) {
-        this.props.onCommit();
-      }
+      this.props.onCommit();
     }
   }, {
     key: 'onInputChange',
@@ -261,7 +259,6 @@ var Autosuggest = (function (_Component) {
   }, {
     key: 'onSuggestionMouseDown',
     value: function onSuggestionMouseDown(sectionIndex, suggestionIndex) {
-      this.fireOnCommit();
       this.setState({
         value: this.getSuggestionText(sectionIndex, suggestionIndex),
         suggestions: null,
@@ -274,6 +271,8 @@ var Autosuggest = (function (_Component) {
           findDOMNode(this.refs.input).focus();
         }).bind(this));
       });
+
+      this.fireOnCommit();
     }
   }, {
     key: 'getSuggestionId',
